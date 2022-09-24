@@ -1,0 +1,1 @@
+ffmpeg -i example.mp4 -codec:a copy -vcodec libx264  -vf scale=1920x1080 -preset slow output.mp4
