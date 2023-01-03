@@ -2,10 +2,16 @@
   "name": "command-executor",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --experimental-modules --es-module-specifier-resolution=node dist/app.js"
   },
   "author": "Nikita Kazakevich",
-  "license": "ISC"
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "@types/inquirer": "^9.0.1",
+    "inquirer": "^9.1.2",
+    "tsyringe": "^4.7.0"
+  }
 }
