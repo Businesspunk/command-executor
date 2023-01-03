@@ -7,11 +7,13 @@
     "start": "node --experimental-modules --es-module-specifier-resolution=node dist/app.js"
   },
   "author": "Nikita Kazakevich",
-  "type": "module",
   "license": "ISC",
   "dependencies": {
-    "@types/inquirer": "^9.0.1",
-    "inquirer": "^9.1.2",
+    "inquirer": "^9.1.4",
     "tsyringe": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.11.18"
   }
 }
