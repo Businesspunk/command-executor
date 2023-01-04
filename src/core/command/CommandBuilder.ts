@@ -1,3 +1,5 @@
+import { CommandPresenterInterface } from "./CommandPresenterInterface";
+
 export class CommandBuilder {
   private options: Map<string, string | null> = new Map();
 
@@ -8,14 +10,19 @@ export class CommandBuilder {
     return this;
   }
 
-  public build(): string {
-    let result = "";
+  public build(): CommandPresenterInterface {
+    let params: string[] = [];
     this.options.forEach((value, key) => {
-      result += " " + key;
+      let option = key;
       if (value != null) {
-        result += " " + value;
+        option += " " + value;
       }
+      params.push(option);
     });
-    return this.commandName + result;
+
+    return {
+      name: this.commandName,
+      params,
+    };
   }
 }
