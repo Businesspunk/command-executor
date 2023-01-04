@@ -1,7 +1,7 @@
 export class CommandBuilder {
   private options: Map<string, string | null> = new Map();
 
-  public constructor(private commandName: string) {}
+  public constructor(private readonly commandName: string) {}
 
   public setOption(name: string, value: string | null = null): this {
     this.options.set(name, value);
