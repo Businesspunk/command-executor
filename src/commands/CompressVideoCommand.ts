@@ -20,11 +20,11 @@ export class CommpressVideoCommand extends Command {
   }
 
   protected async promptParameters(): Promise<void> {
-    const pathToVideo = await this.promptService.input<string>("Path to video", PromptType.Input);
+    const pathToVideo = await this.promptService.input("Path to video", PromptType.Input);
 
     const width = await this.promptService.input<number>("Width", PromptType.Number, {defaultValue: 1920});
     const height = await this.promptService.input<number>("Height", PromptType.Number, {defaultValue: 1080});
-    const outputName = await this.promptService.input<string>("Output", PromptType.Input);
+    const outputName = await this.promptService.input("Output", PromptType.Input);
 
     this.commandBuilder
       .setOption("-i", pathToVideo)
