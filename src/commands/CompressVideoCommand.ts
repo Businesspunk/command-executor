@@ -7,7 +7,7 @@ import { CommandExecutor } from "../core/command/CommandExecutor";
 import { CommandBuilder } from "../core/command/CommandBuilder";
 
 @injectable()
-export class CommpressVideoCommand extends Command {
+export class CommpressVideoCommand extends Command { 
   protected readonly name = "ffmpeg";
 
   public constructor(
@@ -22,8 +22,8 @@ export class CommpressVideoCommand extends Command {
   protected async promptParameters(): Promise<void> {
     const pathToVideo = await this.promptService.input<string>("Path to video", PromptType.Input);
 
-    const width = await this.promptService.input<number>("Width", PromptType.Number, 1920);
-    const height = await this.promptService.input<number>("Height", PromptType.Number, 1080);
+    const width = await this.promptService.input<number>("Width", PromptType.Number, {defaultValue: 1920});
+    const height = await this.promptService.input<number>("Height", PromptType.Number, {defaultValue: 1080});
     const outputName = await this.promptService.input<string>("Output", PromptType.Input);
 
     this.commandBuilder
@@ -36,5 +36,9 @@ export class CommpressVideoCommand extends Command {
       .setOption("scale", `${width}x${height}`, CommandOperator.Equal)
       .setOption("-preset", "slow")
       .setOption(outputName + "-commpressed.mp4");
+  }
+
+  public getName(): string {
+    return this.name    
   }
 }
