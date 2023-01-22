@@ -9,9 +9,10 @@
   "author": "Nikita Kazakevich",
   "license": "ISC",
   "dependencies": {
+    "@types/inquirer": "^8.2.5",
     "inquirer": "^8.2.5",
-    "tsyringe": "^4.7.0",
-    "@types/inquirer": "^8.2.5"
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.7.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18"

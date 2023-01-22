@@ -3,9 +3,13 @@ import { CommandOperator } from "./CommandOperator";
 import { CommandValueItemInterface } from "./interface/CommandValueItemIterface";
 
 export class CommandBuilder {
+  private commandName: string;
   private options: Map<string, CommandValueItemInterface | null> = new Map();
 
-  public constructor(private readonly commandName: string) {}
+  public setName(commandName: string): this {
+    this.commandName = commandName;
+    return this;
+  }
 
   public setOption(name: string, value: string | null = null, operator: CommandOperator | null = null): this {
     if (value) {
