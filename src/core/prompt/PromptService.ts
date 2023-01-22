@@ -1,10 +1,10 @@
 import inquirer from "inquirer";
 import { PromptType } from "./PromptTypes";
 
-export class Prompt {
-  public async input<T>(message: string, type: PromptType): Promise<T> {
+export class PromptService {
+  public async input<T>(message: string, type: PromptType, defaultValue: number|string|null = null): Promise<T> {
     return (
-      await inquirer.prompt<{ result: T }>([{ type, name: "result", message }])
+      await inquirer.prompt<{ result: T }>([{ type, name: "result", message, default: defaultValue }])
     ).result;
   }
 }

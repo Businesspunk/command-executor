@@ -1,18 +1,19 @@
 import { CommandBuilder } from "./CommandBuilder";
+import { CommandExecutor } from "./CommandExecutor";
 
 export abstract class Command {
-  private readonly name: string;
-  private readonly commandBuilder: CommandBuilder;
+  protected readonly commandBuilder: CommandBuilder;
+  protected readonly executor: CommandExecutor;
 
-  constructor() {
-    this.commandBuilder = new CommandBuilder(this.name);
+  constructor(private readonly name: string) {
+    this.commandBuilder = new CommandBuilder(name);
+    this.executor = new CommandExecutor();
   }
 
-  public run() {
-    const parameters = this.promptParameters();
-    this.runCommand(parameters);
+  public async run(): Promise<void> {
+    await this.promptParameters();
+    this.executor.run(this.name, this.commandBuilder.build().params);
   }
 
-  protected abstract promptParameters(): any;
-  protected abstract runCommand(parameters: any): any;
+  protected abstract promptParameters(): void;
 }

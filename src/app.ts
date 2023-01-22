@@ -1,8 +1,9 @@
+import { CommpressVideoCommand } from "./commands/CompressVideoCommand";
+
 class App {
-    public run(): void {
-        console.log('Run Application')
-    }
+  public run(): void {
+    new CommpressVideoCommand().run();
+  }
 }
 
-
-new App().run()
+new App().run();
