@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "node --experimental-modules --es-module-specifier-resolution=node dist/app.js"
+    "compile": "tsc",
+    "start": "node dist/app.js"
   },
   "author": "Nikita Kazakevich",
   "license": "ISC",
