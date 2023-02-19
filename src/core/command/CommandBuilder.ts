@@ -40,4 +40,8 @@ export class CommandBuilder {
 
     return { name: this.commandName, params };
   }
+
+  public getName(): string {
+    return this.commandName
+  }
 }
