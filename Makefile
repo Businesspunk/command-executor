@@ -1,5 +1,5 @@
 REGISTRY := $(shell echo businesspunk)
-TAG := $(shell echo 1.1)
+TAG := $(shell echo 1.1.1)
 
 prod-build:
 	docker build --no-cache --pull --file=docker/prod/Dockerfile -t $(REGISTRY)/command-executor:$(TAG) .

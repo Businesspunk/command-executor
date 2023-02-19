@@ -2,14 +2,14 @@ FROM node:18.9-alpine AS builder
 
 WORKDIR /app
 
-COPY ./package.json ./package-lock.json ./tsconfig.json ./
+COPY ./package.json ./package-lock.json ./tsconfig.json ./tsconfig.build.json ./
 
 COPY ./src ./src
 
-RUN npm install -g npm@9.4.1 && \
+RUN npm install -g npm@9.5.0 && \
     npm i -g typescript && \
     npm install --production && \
-    npm run compile
+    npm run build
 
 ##################################
 
