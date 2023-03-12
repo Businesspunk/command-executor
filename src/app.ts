@@ -2,26 +2,35 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import { injectable } from "tsyringe";
 import { CommpressVideoCommand } from "./commands/CompressVideoCommand";
+import { DownloadYouTubeVideo } from "./commands/DownloadYouTubeVideo";
 import { PromptService } from "./core/prompt/PromptService";
 import { PromptType } from "./core/prompt/PromptTypes";
+import { Command } from "./core/command/Command";
+import { sprintf } from "sprintf-js";
 
 @injectable()
 class App {
+  private commands: Command[] = [];
+
   public constructor(
     private readonly promptService: PromptService,
-    private readonly commpressVideoCommand: CommpressVideoCommand
-  ) {}
+    commpressVideoCommand: CommpressVideoCommand,
+    youtubeVideoDownloader: DownloadYouTubeVideo
+  ) {
+    this.commands.push(commpressVideoCommand, youtubeVideoDownloader);
+  }
 
   public async run(): Promise<void> {
-    const command = await this.promptService.input("Choose command", PromptType.List, {
-      choices: [this.commpressVideoCommand.getName()],
+    const choosedOption = await this.promptService.input<{ command: Command }>("Choose command", PromptType.List, {
+      choices: this.commands.map((command: Command) => {
+        return {
+          name: sprintf("%s (%s)", command.getName(), command.getDescription()),
+          value: { command },
+        };
+      }),
     });
 
-    switch (command) {
-      case this.commpressVideoCommand.getName():
-        this.commpressVideoCommand.run();
-        break;
-    }
+    choosedOption.command.run();
   }
 }
 

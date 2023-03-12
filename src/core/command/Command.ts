@@ -12,4 +12,10 @@ export abstract class Command {
   }
 
   protected abstract promptParameters(): void;
+
+  public getName(): string {
+    return this.name
+  }
+
+  public abstract getDescription(): string
 }

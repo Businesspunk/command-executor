@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/inquirer": "^8.2.5",
+    "@types/sprintf-js": "^1.1.2",
     "inquirer": "^8.2.5",
     "reflect-metadata": "^0.1.13",
+    "sprintf-js": "^1.1.2",
     "tsyringe": "^4.7.0"
   },
   "devDependencies": {
