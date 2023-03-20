@@ -7,7 +7,7 @@ RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python && \
     pip3 install --no-cache --upgrade pip setuptools
 
 # Install NPM
-RUN npm install -g npm@9.5.0 && \
+RUN npm install -g npm@9.6.2 && \
     npm i -g typescript
 
 # Install FFMPEG

@@ -4,10 +4,9 @@ import { CommandBuilder } from "../core/command/CommandBuilder";
 import { CommandExecutor } from "../core/command/CommandExecutor";
 import { PromptService } from "../core/prompt/PromptService";
 import { PromptType } from "../core/prompt/PromptTypes";
-import { YoutubeVideoQualityResolution } from "./enum/YoutubeVideoQualityResolution";
 
 @injectable()
-export class DownloadYouTubeVideo extends Command {
+export class DownloadYouTubeAudioCommand extends Command {
   protected readonly name = "yt-dlp";
 
   public constructor(
@@ -21,23 +20,10 @@ export class DownloadYouTubeVideo extends Command {
 
   protected async promptParameters(): Promise<void> {
     const videoUrl = await this.promptService.input("Youtube video URL", PromptType.Input);
-    this.commandBuilder.setOption(videoUrl);
-
-    const quality = await this.promptService.input("Choose Quality", PromptType.List, {
-      choices: Object.values(YoutubeVideoQualityResolution),
-    });
-
-    switch (quality) {
-      case YoutubeVideoQualityResolution.Regular:
-        this.commandBuilder.setOption("-S", "res:720");
-        break;
-      case YoutubeVideoQualityResolution.High:
-        this.commandBuilder.setOption("-S", "res:1080");
-        break;
-    }
+    this.commandBuilder.setOption(videoUrl).setOption("-x").setOption("--audio-format", "mp3");
   }
 
   public getDescription(): string {
-    return "Youtube Video Downloader";
+    return "Youtube Audio Downloader";
   }
 }

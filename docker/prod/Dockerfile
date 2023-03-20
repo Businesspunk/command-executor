@@ -6,7 +6,7 @@ COPY ./package.json ./package-lock.json ./tsconfig.json ./tsconfig.build.json ./
 
 COPY ./src ./src
 
-RUN npm install -g npm@9.5.0 && \
+RUN npm install -g npm@9.6.2 && \
     npm i -g typescript && \
     npm install --production && \
     npm run build
