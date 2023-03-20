@@ -27,13 +27,16 @@ export class DownloadYouTubeVideoCommand extends Command {
       choices: Object.values(YoutubeVideoQualityResolution),
     });
 
+    const extension = "ext:mp4:m4a";
     switch (quality) {
       case YoutubeVideoQualityResolution.Regular:
-        this.commandBuilder.setOption("-S", "res:720");
+        this.commandBuilder.setOption("-S", [extension, "res:720"].join(","));
         break;
       case YoutubeVideoQualityResolution.High:
-        this.commandBuilder.setOption("-S", "res:1080");
+        this.commandBuilder.setOption("-S", [extension, "res:1080"].join(","));
         break;
+      default: 
+        this.commandBuilder.setOption("-S", extension)
     }
   }
 
