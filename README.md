@@ -7,7 +7,7 @@ It goes along with extensible architecture, so it's easy to add new commands or 
 ## Getting Started
 
 ```
-docker run -it -v ${PWD}:/app businesspunk/command-executor
+docker run -it -v ${PWD}:/app/volume businesspunk/command-executor
 ```
 
 ## Project Structure
@@ -46,6 +46,7 @@ docker run -it -v ${PWD}:/app businesspunk/command-executor
 ## ToDo
 
 - Add more integrations with Linux tools
+- Optimize DockerImage size
 
 
 ## Tech Stack
