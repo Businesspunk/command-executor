@@ -38,9 +38,9 @@ docker run -it -v ${PWD}:/app businesspunk/command-executor
 
 ## Screenshots
 
-![commands screenshot](https://github.com/Businesspunk/command-executor/github/commands.jpg)
+![commands screenshot](https://github.com/Businesspunk/command-executor/blob/main/github/commands.jpg)
 
-![ffmpeg screenshot](https://github.com/Businesspunk/command-executor/github/ffmpeg.png)
+![ffmpeg screenshot](https://github.com/Businesspunk/command-executor/blob/main/github/ffmpeg.png)
 
 
 ## ToDo
