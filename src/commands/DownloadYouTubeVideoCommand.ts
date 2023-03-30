@@ -5,6 +5,7 @@ import { CommandExecutor } from "../core/command/CommandExecutor";
 import { PromptService } from "../core/prompt/PromptService";
 import { PromptType } from "../core/prompt/PromptTypes";
 import { YoutubeVideoQualityResolution } from "./enum/YoutubeVideoQualityResolution";
+import { Path } from "../core/filesystem/Path";
 
 @injectable()
 export class DownloadYouTubeVideoCommand extends Command {
@@ -13,7 +14,8 @@ export class DownloadYouTubeVideoCommand extends Command {
   public constructor(
     private readonly promptService: PromptService,
     protected readonly executor: CommandExecutor,
-    protected readonly commandBuilder: CommandBuilder
+    protected readonly commandBuilder: CommandBuilder,
+    private readonly path: Path
   ) {
     super();
     commandBuilder.setName(this.name);
@@ -21,6 +23,7 @@ export class DownloadYouTubeVideoCommand extends Command {
 
   protected async promptParameters(): Promise<void> {
     const videoUrl = await this.promptService.input("Youtube video URL", PromptType.Input);
+    this.commandBuilder.setOption("-o", this.path.makePathToPublicUserVolume("%(title)s.%(ext)s"));
     this.commandBuilder.setOption(videoUrl);
 
     const quality = await this.promptService.input("Choose Quality", PromptType.List, {
@@ -35,8 +38,8 @@ export class DownloadYouTubeVideoCommand extends Command {
       case YoutubeVideoQualityResolution.High:
         this.commandBuilder.setOption("-S", [extension, "res:1080"].join(","));
         break;
-      default: 
-        this.commandBuilder.setOption("-S", extension)
+      default:
+        this.commandBuilder.setOption("-S", extension);
     }
   }
 

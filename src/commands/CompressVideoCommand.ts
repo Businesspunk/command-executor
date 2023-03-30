@@ -5,6 +5,7 @@ import { PromptService } from "../core/prompt/PromptService";
 import { PromptType } from "../core/prompt/PromptTypes";
 import { CommandExecutor } from "../core/command/CommandExecutor";
 import { CommandBuilder } from "../core/command/CommandBuilder";
+import { Path } from "../core/filesystem/Path";
 
 @injectable()
 export class CommpressVideoCommand extends Command {
@@ -13,7 +14,8 @@ export class CommpressVideoCommand extends Command {
   public constructor(
     private readonly promptService: PromptService,
     protected readonly executor: CommandExecutor,
-    protected readonly commandBuilder: CommandBuilder
+    protected readonly commandBuilder: CommandBuilder,
+    private readonly path: Path
   ) {
     super();
     commandBuilder.setName(this.name);
@@ -27,7 +29,7 @@ export class CommpressVideoCommand extends Command {
     const outputName = await this.promptService.input("Output", PromptType.Input);
 
     this.commandBuilder
-      .setOption("-i", pathToVideo)
+      .setOption("-i", this.path.makePathToPublicUserVolume(pathToVideo))
       .setOption("-codec", "a", CommandOperator.Colon)
       .setOption("copy")
       .setOption("-vcodec")
@@ -35,7 +37,7 @@ export class CommpressVideoCommand extends Command {
       .setOption("-vf")
       .setOption("scale", `${width}x${height}`, CommandOperator.Equal)
       .setOption("-preset", "slow")
-      .setOption(outputName + "-commpressed.mp4");
+      .setOption(this.path.makePathToPublicUserVolume(outputName + "-commpressed.mp4"));
   }
 
   public getDescription(): string {
