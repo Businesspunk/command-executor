@@ -31,3 +31,5 @@ RUN python3 -m pip install https://github.com/yt-dlp/yt-dlp/archive/master.tar.g
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
+
+CMD ["node", "./dist/app.js"]
