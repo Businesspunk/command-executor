@@ -45,8 +45,9 @@ docker run -it -v ${PWD}:/app/volume businesspunk/command-executor
 
 ## ToDo
 
-- Add more integrations with Linux tools
 - Optimize DockerImage size
+- Add Photo compress&converter
+- Add more integrations with Linux tools
 
 
 ## Tech Stack
