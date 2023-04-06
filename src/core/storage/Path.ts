@@ -1,6 +1,6 @@
-import S from "string";
 import { injectable } from "tsyringe";
 import Paths from "./paths.json";
+import * as PathEssential from "path";
 
 @injectable()
 export class Path {
@@ -11,9 +11,6 @@ export class Path {
   }
 
   private mergePaths(...paths: string[]): string {
-    const path = paths.reduce(
-      (result, currentValue: string) => result + "/" + S(currentValue).chompLeft("/").chompRight("/").s
-    );
-    return S(path).chompLeft("/").s;
+    return PathEssential.join(...paths);
   }
 }

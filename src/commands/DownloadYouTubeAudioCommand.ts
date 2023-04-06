@@ -4,7 +4,7 @@ import { CommandBuilder } from "../core/command/CommandBuilder";
 import { CommandExecutor } from "../core/command/CommandExecutor";
 import { PromptService } from "../core/prompt/PromptService";
 import { PromptType } from "../core/prompt/PromptTypes";
-import { Path } from "../core/filesystem/Path";
+import { Path } from "../core/storage/Path";
 
 @injectable()
 export class DownloadYouTubeAudioCommand extends Command {

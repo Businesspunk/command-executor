@@ -5,7 +5,8 @@ import { PromptService } from "../core/prompt/PromptService";
 import { PromptType } from "../core/prompt/PromptTypes";
 import { CommandExecutor } from "../core/command/CommandExecutor";
 import { CommandBuilder } from "../core/command/CommandBuilder";
-import { Path } from "../core/filesystem/Path";
+import { Path } from "../core/storage/Path";
+import { FileStorage } from "../core/storage/FileStorage";
 
 @injectable()
 export class CommpressVideoCommand extends Command {
@@ -15,14 +16,19 @@ export class CommpressVideoCommand extends Command {
     private readonly promptService: PromptService,
     protected readonly executor: CommandExecutor,
     protected readonly commandBuilder: CommandBuilder,
-    private readonly path: Path
+    private readonly path: Path,
+    private readonly fileStorage: FileStorage
   ) {
     super();
     commandBuilder.setName(this.name);
   }
 
   protected async promptParameters(): Promise<void> {
-    const pathToVideo = await this.promptService.input("Path to video", PromptType.Input);
+    const filesInFolders = this.fileStorage.getListOfFiles(this.path.makePathToPublicUserVolume());
+    if (filesInFolders.length === 0) {
+      throw new Error("Folder is empty");
+    }
+    const pathToVideo = await this.promptService.input("Choose video", PromptType.List, { choices: filesInFolders });
 
     const width = await this.promptService.input<number>("Width", PromptType.Number, { defaultValue: 1920 });
     const height = await this.promptService.input<number>("Height", PromptType.Number, { defaultValue: 1080 });
